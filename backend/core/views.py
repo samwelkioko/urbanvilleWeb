@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+def root_view(request):
+    return JsonResponse({
+        "status": "online",
+        "message": "Urbanville Web API is running",
+        "endpoints": ["/admin/", "/api/"]
+    })
