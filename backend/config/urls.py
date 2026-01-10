@@ -7,10 +7,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from core.views import root_view
-
 urlpatterns = [
-    path('', root_view, name='root'),
     path('admin/', admin.site.urls),
     
     # Auth
