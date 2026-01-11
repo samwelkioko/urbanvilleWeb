@@ -7,8 +7,13 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from .views import api_root
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # API Root
+    path('api/', api_root, name='api-root'),
     
     # Auth
     path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
