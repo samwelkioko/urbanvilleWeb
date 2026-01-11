@@ -7,6 +7,11 @@ from rest_framework.permissions import AllowAny
 @permission_classes([AllowAny])
 def api_root(request, format=None):
     return Response({
+        'documentation': {
+            'schema': reverse('schema', request=request, format=format),
+            'swagger-ui': reverse('swagger-ui', request=request, format=format),
+            'redoc': reverse('redoc', request=request, format=format),
+        },
         'auth': {
             'login': reverse('token_obtain_pair', request=request, format=format),
             'refresh': reverse('token_refresh', request=request, format=format),
