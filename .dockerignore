@@ -1,0 +1,14 @@
+**/__pycache__
+*.pyc
+*.pyo
+*.pyd
+.git
+.github
+.gitignore
+.dockerignore
+backend/venv
+frontend/node_modules
+frontend/.next
+frontend/out
+db.sqlite3
+.env
