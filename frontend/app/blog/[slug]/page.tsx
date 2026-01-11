@@ -1,22 +1,35 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import { fetchBlogPost } from "@/lib/api";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
-import { notFound } from "next/navigation";
+import { useParams } from "next/navigation";
 import PageHeader from "@/components/page-header";
 
-export const revalidate = 60;
+export default function BlogPostPage() {
+    const params = useParams();
+    const slug = params?.slug as string;
+    const [post, setPost] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
-    let post = null;
+    useEffect(() => {
+        if (!slug) return;
+        const loadPost = async () => {
+            try {
+                const data = await fetchBlogPost(slug);
+                setPost(data);
+            } catch (e) {
+                console.error("Failed to fetch post:", e);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadPost();
+    }, [slug]);
 
-    try {
-        post = await fetchBlogPost(slug);
-    } catch (e) {
-        console.error("Failed to fetch post:", e);
-    }
-
-    if (!post) return notFound();
+    if (loading) return <div className="min-h-screen pt-24 flex justify-center text-brand-blue">Loading...</div>;
+    if (!post) return <div className="min-h-screen pt-24 text-center">Post not found</div>;
 
     return (
         <main className="min-h-screen bg-brand-light dark:bg-brand-dark">

@@ -1,17 +1,26 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import { fetchBlogPosts } from "@/lib/api";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import PageHeader from "@/components/page-header";
 
-export default async function BlogPage() {
-    let posts = [];
-    try {
-        const data = await fetchBlogPosts();
-        posts = data.results || data;
-    } catch (e) {
-        console.error(e);
-    }
+export default function BlogPage() {
+    const [posts, setPosts] = useState<any[]>([]);
+
+    useEffect(() => {
+        const loadPosts = async () => {
+            try {
+                const data = await fetchBlogPosts();
+                setPosts(data.results || data);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        loadPosts();
+    }, []);
 
     return (
         <main className="min-h-screen bg-brand-light dark:bg-brand-dark">
