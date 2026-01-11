@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'https',
+        hostname: 'api.sargasso-reclamation.com',
+        pathname: '/media/**',
+      },
+      {
         protocol: 'http',
         hostname: '127.0.0.1',
         port: '8000',
