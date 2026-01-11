@@ -7,9 +7,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from django.shortcuts import redirect
 from .views import api_root
 
 urlpatterns = [
+    path('', lambda request: redirect('api-root', permanent=False)),
     path('admin/', admin.site.urls),
     
     # API Root
