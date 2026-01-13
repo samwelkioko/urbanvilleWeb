@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// Default to localhost for dev, can be configured via env
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+// Default to production API, can be configured via env
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.sargasso-reclamation.com";
 
 const api = axios.create({
     baseURL: API_URL,
